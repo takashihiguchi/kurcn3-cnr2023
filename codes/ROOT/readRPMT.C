@@ -659,3 +659,12 @@ int reset(int nbin) {
 	readRPMT( DisplayRPMT::GetFilename(), nbin);
 	return 0;
 }
+
+void proccess(int runid, int idx_s, int idx_e, int tbin){
+    readRPMT(Form("data/20231024/rpmt_run0%i.edr", runid), tbin);
+    xRange(idx_s, idx_e, tbin);
+	TCanvas *c1;
+	c1 = DisplayRPMT::GetCanvas();
+    c1->SaveAs(Form("tof/rpmt_run%d_%d_%d_%d.png", runid, idx_s, idx_e, tbin));
+    saveTOF(Form("tof/rpmt_run%d_%d_%d_%d.csv", runid, idx_s, idx_e, tbin));
+}
